@@ -1,20 +1,24 @@
 const express = require("express");
 
 const app = express();
-const {adminAuth, userAuth} = require("./middlewares/auth.js")
-app.use("/admin",adminAuth)
 
-app.get("/admin/getsData",(req,res)=> {
-    res.send("Admin gets the data ")
+app.use("/",(err,req,res,next)=> {
+    if(err){
+        res.status(500).send("something went wrong");
+    }
 })
 
-app.get("/user/getData", userAuth, (req,res)=> {
-    res.send("gets the userdata")
+
+app.get("/userdata", (req,res)=> {
+        throw new Error("sjfjk");
+        res.send("user data sent ")
+    
 })
 
-app.post("/user/postData", (req,res)=> {
-    res.send("posted the data to database ")
-})
+
+
+ 
+
 app.listen(3000,()=>{
     console.log("server is successfully listening on this port ")
 });
