@@ -14,5 +14,11 @@ profileRouter.get("/profile",userAuth,async (req,res)=> {
      catch(err){
         res.status(400).send("Error"+err.message)
      }
+});
+
+profileRouter.patch("/profile/edit",userAuth,async (req,res) => {
+    
 })
+
+
 module.exports = profileRouter;
