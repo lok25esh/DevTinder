@@ -5,7 +5,7 @@ const {validateSignUpdata} = require("../utils/validation.js")
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 authRouter.post("/signUp", async (req,res)=>{
-    console.log("incoming body", req.body);
+
 
     
     // encrypt the pass word and then store the data into database 
@@ -21,13 +21,13 @@ authRouter.post("/signUp", async (req,res)=>{
      const {firstName,lastName,emailId,password} = req.body;
      //encrypting
      const passwordHash = await  bcrypt.hash(password,10);
-     console.log(passwordHash);
+
      const userObj = new User({firstName,lastName,emailId,password : passwordHash});
     await userObj.save();
     res.send("user Added successfully ")
     }
    catch(err){
-    console.log("Error"+err)
+ 
     res.status(400).send("Error saving the use "+err.message)
    }
 
@@ -49,7 +49,7 @@ authRouter.post("/login",async (req,res)=> {
         else{
             //create a jwt token 
             const token = await jwt.sign({_id:user._id},"DEV@Tinder$790",{expiresIn:"1d"});
-            console.log(token);
+     
 
             //add the token to cookie and res back to user 
             res.cookie("token",token);
